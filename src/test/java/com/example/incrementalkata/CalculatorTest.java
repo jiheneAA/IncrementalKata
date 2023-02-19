@@ -19,12 +19,6 @@ class CalculatorTest {
         assertThat(result).isEqualTo(8);
     }
 
-    @Test
-    void should_return_sum_when_negative_number() {
-        int result = calculator.add("-1,7");
-        assertThat(result).isEqualTo(6);
-    }
-
     @ParameterizedTest
     @NullAndEmptySource
     void should_return_zero_when_numbers_is_null_or_empty(String input) {
@@ -52,5 +46,10 @@ class CalculatorTest {
     @Test
     void should_throw_illegal_argument_exception_when_not_only_one_delimiter_change() {
         assertThrows(IllegalArgumentException.class, () -> calculator.add("//1;2//;\n"));
+    }
+
+    @Test
+    void should_throw_exception_when_negative_numbers() {
+        assertThrows(IllegalArgumentException.class, () -> calculator.add("-1,7,-2,-1,-7"));
     }
 }
