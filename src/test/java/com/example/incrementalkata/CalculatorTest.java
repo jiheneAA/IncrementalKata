@@ -14,7 +14,7 @@ class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"8", "1,7", "1,2,5"})
-    void should_return_sum_when_comma_separator(String input) {
+    void should_return_sum_when_comma_delimiter(String input) {
         int result = calculator.add(input);
         assertThat(result).isEqualTo(8);
     }
@@ -38,8 +38,19 @@ class CalculatorTest {
     }
 
     @Test
-    void should_return_sum_when_new_line_and_comma_separators() {
+    void should_return_sum_when_new_line_and_comma_delimiters() {
         int result = calculator.add("1\n2,3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void should_return_sum_when_change_delimiters() {
+        int result = calculator.add("//;\n1;2");
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    void should_throw_illegal_argument_exception_when_not_only_one_delimiter_change() {
+        assertThrows(IllegalArgumentException.class, () -> calculator.add("//1;2//;\n"));
     }
 }
