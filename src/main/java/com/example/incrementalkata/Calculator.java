@@ -6,19 +6,19 @@ import java.util.Arrays;
 
 public class Calculator {
 
-    public static final String COMMA_SEPARATOR = ",";
+    public static final String SEPARATORS = "[,\n]";
 
     public int add(String numbers) {
         if (StringUtils.isBlank(numbers)) {
             return 0;
         }
-        String[] split = numbers.split(COMMA_SEPARATOR);
+        String[] split = numbers.split(SEPARATORS, -1);
         try {
             return Arrays.stream(split)
                     .map(Integer::parseInt)
                     .reduce(0, Integer::sum);
         } catch(NumberFormatException e) {
-            throw new IllegalArgumentException("input should contain only numbers with comma separator!");
+            throw new IllegalArgumentException("input should contain only numbers with comma and new line separators!");
         }
     }
 }
