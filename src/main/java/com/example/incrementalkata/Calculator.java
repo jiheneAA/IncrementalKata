@@ -13,9 +13,6 @@ public class Calculator {
             return 0;
         }
         String[] split = numbers.split(COMMA_SEPARATOR);
-        if (split.length > 2) {
-            throw new IllegalArgumentException("input should contain at most two numbers!");
-        }
         try {
             return Arrays.stream(split)
                     .map(Integer::parseInt)

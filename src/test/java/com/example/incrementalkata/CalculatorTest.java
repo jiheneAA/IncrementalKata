@@ -13,7 +13,7 @@ class CalculatorTest {
     private final Calculator calculator = new Calculator();
 
     @ParameterizedTest
-    @ValueSource(strings = {"8", "1,7"})
+    @ValueSource(strings = {"8", "1,7", "1,2,5"})
     void should_return_sum(String input) {
         int result = calculator.add(input);
         assertThat(result).isEqualTo(8);
@@ -30,11 +30,6 @@ class CalculatorTest {
     void should_return_zero_when_numbers_is_null_or_empty(String input) {
         int result = calculator.add(input);
         assertThat(result).isZero();
-    }
-
-    @Test
-    void should_throw_illegal_argument_exception_when_more_than_2_numbers() {
-        assertThrows(IllegalArgumentException.class, () -> calculator.add("1,2,3"));
     }
 
     @Test
